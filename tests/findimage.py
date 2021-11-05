@@ -1,4 +1,5 @@
-# script that tracks the head of the snake
+# reference for detecting and highlighting a template
+# uses matplotlib to demonstrate different types of template match methods
 import sys
 import cv2 as cv
 from matplotlib import pyplot as plt

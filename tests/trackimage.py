@@ -1,12 +1,11 @@
-# script that tracks the head of the snake
+# test program for image tracking using oop approach
+# currently tracks apples and snake head
+# updates every frame when running
+# can be canceled by pressing q
 import sys
 import cv2 as cv
-from matplotlib import pyplot as plt
 import numpy as np
-import time
 import mss
-
-
 
 def Screen_Shot(left=0, top=0, width=600, height=668):
 	stc = mss.mss()

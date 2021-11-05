@@ -1,0 +1,14 @@
+# Planning / thoughts document
+
+Rules of snake
+The snake can move up, down, left or right
+The snake moves at a constant speed in a given direction
+The snake must collect apples that spawn 1 after the other
+For every apple the snake collects, it's length grows by 1
+The snake cannot collide with itself, or else it dies
+The snake cannot collide with a wall, or else it dies
+
+- - - -
+
+With these rules in mind, I can begin to think about how my bot will need to behave - and what elements I need to make my bot aware of.
+
