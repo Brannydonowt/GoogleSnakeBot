@@ -12,3 +12,66 @@ The snake cannot collide with a wall, or else it dies
 
 With these rules in mind, I can begin to think about how my bot will need to behave - and what elements I need to make my bot aware of.
 
+The core idea I have in order to tackle this, is to only use template matching to find where on the grid the apple is placed.
+We can then feed that grid coordinate to the bot, that is basically playing it's own version of the game and mirroring it's decisions into the Google Snake version of the game. 
+
+This breaks the challenge into two big problems
+
+Problem 1 - Reading and interacting with Google Snake
+
+1) Scan screen for game
+    Find the game on the screen.
+2) Find the top left corner, and bottom right corner of the game grid
+    This will allow us to find each in-game grid cell
+    We know the total area of the grid, the cells are divided evenly on both sides
+
+3) Finding the Grid Cell of a current Apple
+    Template Match to find the current apple location
+    Correlate the found location to a Grid Cell
+    Return the grid cell
+
+4) Game Start/Stop
+    Detect when the game has ended
+    Restart
+
+Problem 2 - Simulating our own version of snake
+To get this working, I'm basically going to be simulating snake and passing the decisions back to Google Snake.
+
+I'm imagining it will end up something like this
+[0][0][0][0][0][0][0][0][0][0]
+[0][0][0][0][0][0][0][0][0][0]
+[0][0][0][0][1][1][1][0][2][0]
+[0][0][0][0][1][0][0][0][0][0]
+[0][1][1][1][1][0][0][0][0][0]
+[0][0][0][0][0][0][0][0][0][0]
+[0][0][0][0][0][0][0][0][0][0]
+[0][0][0][0][0][0][0][0][0][0]
+[0][0][0][0][0][0][0][0][0][0]
+[0][0][0][0][0][0][0][0][0][0]
+
+The snake is an array of body positions 
+Every time we move 
+    we append the new position to the array
+    if an apple hasn't been picked up
+        drop the last position in the array
+    - thanks dex
+
+The next position is decided based on the target direction
+the next position cannot be the opposite of whatever direction we are currently moving in
+
+
+
+
+----
+
+A cell based approach where each cell has information of what is happening may make things simpler
+
+
+
+
+
+
+
+
+
+
