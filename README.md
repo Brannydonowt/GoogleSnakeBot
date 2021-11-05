@@ -4,6 +4,8 @@ A Google Snake Bot Written with Python and Open CV
 
 This bot is being written as an introduction to Python
 
+Read pseudo.txt to understand my plans/thoughts behind developing the bot.
+
 You will likely find some strange/non-standard conventions. I come from a C# background so I am applying a similar coding style here. 
 
 You will likely find duplicated code between the different 'bot', 'tests' folders.
