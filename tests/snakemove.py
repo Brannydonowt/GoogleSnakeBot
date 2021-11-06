@@ -15,7 +15,7 @@ apple = [8, 8]
 def move_snake(dir):
     headPos = snake[len(snake) - 1]
     newHead = [headPos[0] + dir[0], headPos[1] + dir[1]]
-    snake.insert(len(snake), newHead)
+    snake.append(newHead)
     snake.pop(0)
     display_snake_on_grid(10)
 
