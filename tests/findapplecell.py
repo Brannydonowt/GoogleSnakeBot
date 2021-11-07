@@ -11,8 +11,6 @@ import sys
 # until we find the right rgba
 # then we return the row and column, this is the top left corner of the game
 # game board is 17x15 by default
-globalstart = []
-end = []
 
 def Screen_Shot(left=0, top=0, width=600, height=668):
 	stc = mss.mss()
