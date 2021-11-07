@@ -28,7 +28,7 @@ def main():
         tlA, brA = get_target_rect(img, 'img/apple.jpg')
         draw_rectangle(img, tlA, brA, (0, 0, 255))
         tlS, brS = get_target_rect(img, 'img/snake_head.jpg')
-        draw_rectangle(img, tlS, brS, (0, 2555, 0))
+        draw_rectangle(img, tlS, brS, (0, 255, 0))
         cv.imshow('res', img)
 
         if cv.waitKey(1) & 0xFF == ord("q"):
