@@ -110,6 +110,7 @@ class vision:
             if (xDif < t and xDif > (0 - t)):
                 if (yDif < t and yDif > (0 - t)):
                     self.apple_cell = cell
+                    self.get_apple_loc()
                     return cell
 
             #if compare (cc, ac):
@@ -117,9 +118,9 @@ class vision:
                 #return cell
 
     def get_apple_loc(self):
+        self.get_apple_cell()
         self.apple_loc = [self.apple_cell[2], self.apple_cell[3]]
         print(self.apple_loc)
-        print (self.game_cells.index(self.apple_cell))
         return self.apple_loc
 
     def get_center_point(self, start, end):
