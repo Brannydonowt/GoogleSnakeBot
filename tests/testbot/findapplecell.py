@@ -5,7 +5,6 @@ from PIL import Image
 import collections
 import time
 import sys
-import snakemove
 # desired rgba = 170, 215, 81
 # we want to look in every column of every row
 # so row 1: check each colomn, etc...
@@ -13,6 +12,10 @@ import snakemove
 # then we return the row and column, this is the top left corner of the game
 # game board is 17x15 by default
 class vision:
+    game_cells = []
+    apple_cell = []
+    apple_loc = []
+
     def Screen_Shot(self, left=0, top=0, width=600, height=668):
         stc = mss.mss()
         scr = stc.grab({
@@ -64,7 +67,7 @@ class vision:
                 tly = s[1] + (cellh * divY)
                 brx = tlx + cellw
                 bry = tly + cellh
-                cell = [[tlx, tly], [brx, bry], [cellw, cellh]]
+                cell = [[int(tlx), int(tly)], [int(brx), int(bry)], divX + 1, divY + 1]
                 cells.append(cell)
         
         return cells
@@ -102,34 +105,36 @@ class vision:
             #print (cc)
             #print(end)
             xDif = cc[0] - ac[0]
-            print (f"XDIF = {xDif}")
             yDif = cc[1] - ac[1]
-            print (f"YDIF = {yDif}")
 
             if (xDif < t and xDif > (0 - t)):
-                print(f"XDIF of {xDif} is lower than threshold{t}")
                 if (yDif < t and yDif > (0 - t)):
-                    print (f"YDIF of {yDif} is lower than threshold{t}")
+                    self.apple_cell = cell
                     return cell
 
             #if compare (cc, ac):
             #print(f'MATCHING CELL = {cell}')
                 #return cell
 
+    def get_apple_loc(self):
+        self.apple_loc = [self.apple_cell[2], self.apple_cell[3]]
+        print(self.apple_loc)
+        print (self.game_cells.index(self.apple_cell))
+        return self.apple_loc
+
     def get_center_point(self, start, end):
         cx = (start[0] + end[0]) / 2
         cy = (start[1] + end[1]) / 2
-        print (f"Center of: {start[0]}, {end[0]} = {cx}")
         return [int(cx), int(cy)]
 
 
-    def main(self):
+    def setup(self):
         game = self.Screen_Shot()
         start = self.get_board_start(game)
         end = self.get_board_end(game)
         self.draw_rectangle(game, start, end, (0, 0, 255))
-        game_cells = self.divide_game_board(start, end, 17)
-        for cell in game_cells:
+        self.game_cells = self.divide_game_board(start, end, 17)
+        for cell in self.game_cells:
             tl = [int(cell[0][0]), int(cell[0][1])]
             br = [int(cell[1][0]), int(cell[1][1])]
             self.draw_rectangle(game, tl, br, (0, 255, 0))
@@ -137,7 +142,42 @@ class vision:
         apple = self.get_target_rect(game, 'img/apple.jpg')
         self.draw_rectangle(game, apple[0], apple[1], (255, 0, 0))
 
-        ac = self.get_apple_cell(apple[0], apple[1], game_cells, 10)
+        ac = self.get_apple_cell(apple[0], apple[1], self.game_cells, 10)
+        self.draw_rectangle(game, [int(ac[0][0]), int(ac[0][1])],  [int(ac[1][0]), int(ac[1][1])], (0, 0, 255))
+
+    def get_game(self):
+        game = self.Screen_Shot()
+        start = self.get_board_start(game)
+        end = self.get_board_end(game)
+        self.draw_rectangle(game, start, end, (0, 0, 255))
+        self.game_cells = self.divide_game_board(start, end, 17)
+        for cell in self.game_cells:
+            tl = [int(cell[0][0]), int(cell[0][1])]
+            br = [int(cell[1][0]), int(cell[1][1])]
+            self.draw_rectangle(game, tl, br, (0, 255, 0))
+
+        apple = self.get_target_rect(game, 'img/apple.jpg')
+        self.draw_rectangle(game, apple[0], apple[1], (255, 0, 0))
+
+        ac = self.get_apple_cell(apple[0], apple[1], self.game_cells, 10)
+        self.draw_rectangle(game, [int(ac[0][0]), int(ac[0][1])],  [int(ac[1][0]), int(ac[1][1])], (0, 0, 255))
+
+        return game
+
+    def main(self):
+        game = self.Screen_Shot()
+        start = self.get_board_start(game)
+        end = self.get_board_end(game)
+        self.draw_rectangle(game, start, end, (0, 0, 255))
+        for cell in self.game_cells:
+            tl = [int(cell[0][0]), int(cell[0][1])]
+            br = [int(cell[1][0]), int(cell[1][1])]
+            self.draw_rectangle(game, tl, br, (0, 255, 0))
+        
+        apple = self.get_target_rect(game, 'img/apple.jpg')
+        self.draw_rectangle(game, apple[0], apple[1], (255, 0, 0))
+
+        ac = self.get_apple_cell(apple[0], apple[1], self.game_cells, 10)
         self.draw_rectangle(game, [int(ac[0][0]), int(ac[0][1])],  [int(ac[1][0]), int(ac[1][1])], (0, 0, 255))
 
         running = True

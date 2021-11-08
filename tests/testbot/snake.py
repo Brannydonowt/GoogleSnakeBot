@@ -5,10 +5,13 @@
 # we remove the final item in the list (the snakes tail)
 # we can KEEP the final item, if the player grabbed an apple
 import sys
+import cv2
 import numpy as np
 import time
 import random
 import collections
+import findapplecell as vis
+import input as io
 
 class SnakeMove:
     # the grid is currently working in reverse... [y, x]
@@ -18,22 +21,40 @@ class SnakeMove:
     snakesize = 4
     gridsizeX = 17
     gridsizeY = 15
+
+    v = vis.vision()
     # 0, 1 = right
     # 0, -1 = left
     # 1, 0 = up
     # -1, 0 = down
     def move_snake(self, dir):
+        self.do_input(dir)
         headPos = self.snake[len(self.snake) - 1]
         newHead = [headPos[0] + dir[0], headPos[1] + dir[1]]
         self.snake.append(newHead)
         print(f"Snake head is: {self.snake[len(self.snake) - 1]}")
         print(f"Apple is: {self.apple}")
         if self.is_apple() == True:
-            self.apple = self.new_apple()
+            self.v.get_game()
+            self.apple = self.v.apple_loc
         else:
             self.snake.pop(0)
 
         self.display_game_state()
+    
+    # 0, 1 = right
+    # 0, -1 = left
+    # 1, 0 = up
+    # -1, 0 = down
+    def do_input(self, dir):
+        if dir == [0, 1]:
+            io.move_right()
+        if dir == [0, -1]:
+            io.move_left()
+        if dir == [1, 0]:
+            io.move_up
+        if dir == [-1, 0]:
+            io.move_down
 
     def move_to_apple(self):
         start = self.snake[len(self.snake) - 1]
@@ -62,7 +83,7 @@ class SnakeMove:
             return newapple
 
     def move_apple(self, loc):
-        apple = loc
+        self.apple = loc
 
     def display_game_state(self):
         grid = self.create_grid(self.gridsizeX, self.gridsizeY)
@@ -101,9 +122,5 @@ class SnakeMove:
         running = True
         self.display_game_state()
         while running:
-            time.sleep(0.1)
+            time.sleep(0.15)
             self.move_to_apple()
-
-s = SnakeMove()
-s.create_grid(17, 15)
-s.display_game_state()
