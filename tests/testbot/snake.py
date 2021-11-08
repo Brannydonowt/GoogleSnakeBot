@@ -11,10 +11,13 @@ import random
 import collections
 
 class SnakeMove:
-    snake = [[5, 2], [5, 3], [5, 4], [5, 5], [5, 6]]
-    apple = [8, 8]
-    snakesize = 5
-    gridsize = 20
+    # the grid is currently working in reverse... [y, x]
+    # everything also seems shifted one to the left
+    snake = [[8, 2], [8, 3], [8, 4], [8, 5]]
+    apple = [8, 13]
+    snakesize = 4
+    gridsizeX = 17
+    gridsizeY = 15
     # 0, 1 = right
     # 0, -1 = left
     # 1, 0 = up
@@ -58,16 +61,19 @@ class SnakeMove:
         else:
             return newapple
 
-    def display_game_state(self):
-        grid = self.create_grid(self.gridsize)
-        for body in self.snake:
-            grid[body[0]][body[1]] = 1
+    def move_apple(self, loc):
+        apple = loc
 
-        grid[self.apple[0]][self.apple[1]] = 2
+    def display_game_state(self):
+        grid = self.create_grid(self.gridsizeX, self.gridsizeY)
+        for body in self.snake:
+            grid[body[0] - 1][body[1] -1] = 1
+
+        grid[self.apple[0] - 1][self.apple[1] - 1] = 2
         print(np.matrix(grid))
 
-    def create_grid(self, gridsize):
-        return [[0 for x in range(0, gridsize)] for x in range(0, gridsize)]
+    def create_grid(self, gx, gy):
+        return [[0 for x in range(0, gx)] for x in range(0, gy)]
 
     def calc_path(self, start, end):
         dist = [start[0] - end[0], start[1] - end[1]]
@@ -98,6 +104,6 @@ class SnakeMove:
             time.sleep(0.1)
             self.move_to_apple()
 
-
 s = SnakeMove()
-s.main()
+s.create_grid(17, 15)
+s.display_game_state()
