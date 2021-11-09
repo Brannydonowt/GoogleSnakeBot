@@ -12,6 +12,7 @@ import random
 import collections
 import vision as vis
 import input
+import pathing
 
 class SnakeMove:
 
@@ -75,6 +76,7 @@ class SnakeMove:
 
         grid[self.apple[0] - 1][self.apple[1] - 1] = 2
         print(np.matrix(grid))
+        return grid
 
     def create_grid(self, gx, gy):
         return [[0 for x in range(0, gx)] for x in range(0, gy)]
@@ -82,26 +84,9 @@ class SnakeMove:
     def calc_path(self):
         start = self.snake[len(self.snake) - 1]
         end = self.apple
-        dist = [start[0] - end[0], start[1] - end[1]]
-        distY = dist[0]
-        distX = dist[1]
-        #print(f"Dist X = {distX}")
-        #print(f"Dist Y = {distY}")
-        dirX = []
-        for i in range(abs(distX)):
-            if distX < 0:
-                dirX.append([0, 1])
-            if distX > 0:
-                dirX.append([0, -1])
-        dirY = []
-        for i in range(abs(distY)):
-            if distY < 0:
-                dirY.append([1, 0])
-            if distY > 0:
-                dirY.append([-1, 0])
-        dirs = dirX + dirY
-        self.cur_path = dirs
-        #print (dirs)
+
+        dirs = pathing.calc_path_direct(start, end)
+
         if len(dirs) > 0:
             return dirs[len(dirs) - 1]
 
