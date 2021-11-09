@@ -25,7 +25,6 @@ def main():
             # THE GAME GETS OUT OF SYNC BECAUSE WE SLEEP 
             # TO ALLOW TIME TO FIND THE NEW APPLE IMG!!!
             # SOLVE THAT ONE, SMART ASS
-            time.sleep(0.3)
             v.get_game()
             na = v.get_apple_loc()
             s.move_apple(na)
@@ -40,5 +39,7 @@ main()
 # this tracks the snake head so we don't get lost
 # until we have an apple again...
 # then we make our new path based on the last snake head pos and the new apple
+
+# Add a way to wait until apple found is true or something...
 
 # problem is, a snake head can be between two grid cells...
