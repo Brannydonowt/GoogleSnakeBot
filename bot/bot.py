@@ -19,7 +19,7 @@ def main():
     playing = True
     while (playing):
         apple, dir = s.move_to_apple()
-        print(dir)
+        #print(dir)
         i.move_dir(dir)
         if (apple):
             # THE GAME GETS OUT OF SYNC BECAUSE WE SLEEP 
@@ -30,7 +30,6 @@ def main():
             na = v.get_apple_loc()
             s.move_apple(na)
             s.display_game_state()
-
         time.sleep(moveDelay)
 
 setup_game()

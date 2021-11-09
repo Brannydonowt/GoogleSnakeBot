@@ -34,6 +34,8 @@ class SnakeMove:
     # -1, 0 = down
     def move_snake(self, dir):
         headPos = self.snake[len(self.snake) - 1]
+        print (headPos)
+        print (dir)
         newHead = [headPos[0] + dir[0], headPos[1] + dir[1]]
         self.snake.append(newHead)
         #print(f"Snake head is: {self.snake[len(self.snake) - 1]}")
@@ -49,7 +51,7 @@ class SnakeMove:
 
     def has_dir(self):
         if len(self.cur_path) == 0:
-            print(self.cur_path)
+            #print(self.cur_path)
             return True
         else:
             return False
@@ -75,7 +77,7 @@ class SnakeMove:
             grid[body[0] - 1][body[1] -1] = 1
 
         grid[self.apple[0] - 1][self.apple[1] - 1] = 2
-        print(np.matrix(grid))
+        #print(np.matrix(grid))
         return grid
 
     def create_grid(self, gx, gy):
@@ -85,9 +87,10 @@ class SnakeMove:
         start = self.snake[len(self.snake) - 1]
         end = self.apple
 
-        dirs = pathing.calc_path_direct(start, end)
-
-        if len(dirs) > 0:
+        dirs = pathing.calc_safe_path(start, end, self.display_game_state())
+        if type(dirs[0]) == int: 
+            return dirs
+        else:
             return dirs[len(dirs) - 1]
 
     def main(self):
