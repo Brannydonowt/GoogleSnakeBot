@@ -16,8 +16,8 @@ def get_last_dir():
 
 def get_next_Dir(pos):
     global lastdir
-    if pos[1] == 15:
-        if pos[0] < 14:
+    if pos[1] == 12:
+        if pos[0] < 10:
             # we have space if we are bottom right
             print ("moving down")
             lastdir = [1, 0]
@@ -27,8 +27,8 @@ def get_next_Dir(pos):
             lastdir = [0, -1]
             return lastdir
 
-    if pos[1] == 2:
-        if pos[0] > 1:
+    if pos[1] == 4:
+        if pos[0] > 5:
             print ("moving up")
             lastdir = [-1, 0]
             return lastdir
