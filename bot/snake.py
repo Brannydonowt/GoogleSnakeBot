@@ -87,7 +87,7 @@ class SnakeMove:
         start = self.snake[len(self.snake) - 1]
         end = self.apple
 
-        dirs = pathing.calc_safe_path(start, end, self.display_game_state())
+        dirs = pathing.calc_path_direct(start, end)
         if type(dirs[0]) == int: 
             return dirs
         else:

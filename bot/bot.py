@@ -1,6 +1,7 @@
 import cv2
 import vision as vis
 import input
+import calibrate as cal
 import snake
 import time
 
@@ -8,7 +9,15 @@ s = snake.SnakeMove()
 v = vis.vision()
 i = input.Input()
 
-moveDelay = 0.135
+moveDelay = 0.14285714285714285
+
+def calibrate():
+    i.focus_game()
+    v.setup()
+
+    time.sleep(2)
+
+    cal.get_move_speed(v.game_cells)
 
 def setup_game():
     i.focus_game()

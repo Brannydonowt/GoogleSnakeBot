@@ -24,7 +24,7 @@ def calc_path_direct(start, end):
 
     if len(dirs) == 0:
         print ("ROAMING")
-        return get_roam()
+        return calc_path_direct(start, [1, 1])
     return dirs
 
 def calc_safe_path(start, end, game):

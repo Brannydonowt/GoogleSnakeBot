@@ -94,16 +94,11 @@ class vision:
     def get_apple_cell(self, start, end, cells, t = 10):
         
         ac = self.get_center_point(start, end)
-
-        #compare = lambda x, y: (collections.Counter(x) - collections.Counter(y)  t)
         for cell in cells:
             tl = [int(cell[0][0]), int(cell[0][1])]
             br = [int(cell[1][0]), int(cell[1][1])]
             cc = self.get_center_point(tl, br)
 
-            #print (ac)
-            #print (cc)
-            #print(end)
             xDif = cc[0] - ac[0]
             yDif = cc[1] - ac[1]
 
@@ -113,9 +108,19 @@ class vision:
                     print(f"Detected Apple Cell: {self.apple_cell}")
                     return cell
 
-            #if compare (cc, ac):
-            #print(f'MATCHING CELL = {cell}')
-                #return cell
+    def get_cell_of(self, start, end, cells, t = 10):
+        ac = self.get_center_point(start, end)
+        for cell in cells:
+            tl = [int(cell[0][0]), int(cell[0][1])]
+            br = [int(cell[1][0]), int(cell[1][1])]
+            cc = self.get_center_point(tl, br)
+
+            xDif = cc[0] - ac[0]
+            yDif = cc[1] - ac[1]
+
+            if (xDif < t and xDif > (0 - t)):
+                if (yDif < t and yDif > (0 - t)):
+                    return cell
 
     def get_apple_loc(self):
         self.apple_loc = [self.apple_cell[3], self.apple_cell[2]]
