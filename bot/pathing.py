@@ -1,5 +1,43 @@
 import numpy as np
 
+    # 0, 1 = right
+    # 0, -1 = left
+    # 1, 0 = up
+    # -1, 0 = down
+lastdir = []
+
+def set_last_dir(dir):
+    global lastdir
+    lastdir = dir
+
+def get_last_dir():
+    global lastdir
+    return lastdir
+
+def get_next_Dir(pos):
+    global lastdir
+    if pos[1] == 15:
+        if pos[0] < 14:
+            # we have space if we are bottom right
+            print ("moving down")
+            lastdir = [1, 0]
+            return lastdir
+        else:
+            print ("moving left")
+            lastdir = [0, -1]
+            return lastdir
+
+    if pos[1] == 2:
+        if pos[0] > 1:
+            print ("moving up")
+            lastdir = [-1, 0]
+            return lastdir
+        else:
+            lastdir = [0, 1]
+            return lastdir
+
+    return lastdir
+
 def calc_path_direct(start, end):
     dirs = []
     dist = [start[0] - end[0], start[1] - end[1]]

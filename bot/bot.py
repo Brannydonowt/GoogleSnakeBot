@@ -4,12 +4,14 @@ import input
 import calibrate as cal
 import snake
 import time
+import pathing as path
 
 s = snake.SnakeMove()
 v = vis.vision()
 i = input.Input()
 
-moveDelay = 0.14285714285714285
+#moveDelay = 0.14285714285714285
+moveDelay = 0.135
 
 def calibrate():
     i.focus_game()
@@ -21,23 +23,17 @@ def calibrate():
 
 def setup_game():
     i.focus_game()
-    v.setup()
     s.display_game_state()
 
 def main():
     playing = True
+    path.set_last_dir([0, 1])
+    s.snakehead = s.snake[len(s.snake) - 1]
     while (playing):
-        apple, dir = s.move_to_apple()
-        #print(dir)
+        dir = path.get_next_Dir(s.snakehead)
         i.move_dir(dir)
-        if (apple):
-            # THE GAME GETS OUT OF SYNC BECAUSE WE SLEEP 
-            # TO ALLOW TIME TO FIND THE NEW APPLE IMG!!!
-            # SOLVE THAT ONE, SMART ASS
-            v.get_game()
-            na = v.get_apple_loc()
-            s.move_apple(na)
-            s.display_game_state()
+        s.move_snake(dir)
+        s.display_game_state()
         time.sleep(moveDelay)
 
 setup_game()

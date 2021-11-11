@@ -160,29 +160,3 @@ class vision:
         self.draw_rectangle(game, [int(ac[0][0]), int(ac[0][1])],  [int(ac[1][0]), int(ac[1][1])], (0, 0, 255))
 
         return game
-
-    def main(self):
-        game = self.Screen_Shot()
-        start = self.get_board_start(game)
-        end = self.get_board_end(game)
-        self.draw_rectangle(game, start, end, (0, 0, 255))
-        for cell in self.game_cells:
-            tl = [int(cell[0][0]), int(cell[0][1])]
-            br = [int(cell[1][0]), int(cell[1][1])]
-            self.draw_rectangle(game, tl, br, (0, 255, 0))
-        
-        apple = self.get_target_rect(game, 'img/apple.jpg')
-        self.draw_rectangle(game, apple[0], apple[1], (255, 0, 0))
-
-        ac = self.get_apple_cell(apple[0], apple[1], self.game_cells, 10)
-        self.draw_rectangle(game, [int(ac[0][0]), int(ac[0][1])],  [int(ac[1][0]), int(ac[1][1])], (0, 0, 255))
-
-        running = True
-        while running:
-            cv.imshow('res', game)
-
-            if cv.waitKey(1) & 0xFF == ord("q"):
-                    cv.destroyAllWindows()
-                    cv.waitKey(1)
-                    flag = False
-                    sys.exit
