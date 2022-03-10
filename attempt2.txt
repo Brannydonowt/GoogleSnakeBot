@@ -1,0 +1,19 @@
+So it has been a few  months since I last attempted this project.
+
+The goal, of course, is to make Google Snake play itself - using only Python.
+
+This is of course, as an introduction to the Python language, and the world of botting/image recognition.
+
+In my last approach, my plan was to simulate the Snake Game in Python, and replicate the moves on the Google Snake board.
+
+I ran into issues with making the Python game synchronise with the Google Snake game and eventually gave up.
+
+--------------
+
+I've archived that attempt, as botAttempt1 - which ended up being a bot that just moves the snake around in circles.
+
+Moving on to botAttempt2 - I'm going to start from scratch, using what I've already learned from my past attempt.
+
+My idea this time is to stray away from the concept of the game being on a brid - and instead focus on moving the snake to pixel coordinates.
+
+I'll start out by making the snake avoid the game boundary.

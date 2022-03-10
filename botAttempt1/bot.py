@@ -4,6 +4,7 @@ import input
 import calibrate as cal
 import snake
 import time
+import webbrowser
 import pathing as path
 
 s = snake.SnakeMove()
@@ -22,6 +23,8 @@ def calibrate():
     cal.get_move_speed(v.game_cells)
 
 def setup_game():
+    # webbrowser.open('https://www.google.com/fbx?fbx=snake_arcade')
+    time.sleep(5)
     i.focus_game()
     s.display_game_state()
 
