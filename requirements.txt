@@ -1,0 +1,6 @@
+# Snake Bot Requirements.txt
+
+opencv-python
+mss
+Pillow
+pynput

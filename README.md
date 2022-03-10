@@ -1,8 +1,24 @@
 # GoogleSnakeBot
 
-A Google Snake Bot Written with Python and Open CV
+## A Google Snake Bot Written with Python and Open CV
 
 This bot is being written as an introduction to Python
+
+### Getting Started
+To run the bot: 
+1) Ensure you have python installed
+2) Clone the repository to your desired location
+
+3) In the environment, run the following commands
+```
+python -m venv venv
+venv/Scripts/activate
+pip install -r requirements.txt
+```
+
+Assuming there are no errors, you should now be able to run bot/bot.py 
+
+---
 
 Read pseudo.txt to understand my plans/thoughts behind developing the bot.
 
