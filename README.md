@@ -1,6 +1,6 @@
 # GoogleSnakeBot
 
-## A Google Snake Bot Written with Python and Open CV
+## A Google Snake Bot Written with Python
 
 This bot is being written as an introduction to Python
 
