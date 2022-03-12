@@ -21,7 +21,7 @@ class VideoGet:
             if not self.grabbed:
                 self.stop()
             else:
-                cv2.waitKey(2)
+                cv2.waitKey(5)
                 (self.grabbed, self.frame) = self.stream.read()
 
     def stop(self):

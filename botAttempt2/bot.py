@@ -1,32 +1,24 @@
+import cv2 as cv
 import vision as vis
+import framelabeler as labels
+from VideoGet import VideoGet
+from VideoShow import VideoShow
+from CountsPerSec import CountsPerSec
+from threading import Thread
 
-v = vis.vision()
+def handle_video(source=0):
+    video_getter = VideoGet(source).start()
+    video_shower = VideoShow(video_getter.frame).start()
+    cps = CountsPerSec().start()
 
-game_boundary_x = [0, 0]
-game_boundary_y = [0, 0]
+    while True:
+        if video_getter.stopped or video_shower.stopped:
+            video_shower.stop()
+            video_getter.stop()
+            break
 
-def main():
-   running = True
-   img = v.Screen_Shot()
-   game = get_game(img)
-   v.show_img(game)
+        frame = video_getter.frame
+        video_shower.frame = frame
+        cps.increment()
 
-def get_game(img):
-    global game_boundary_x
-    global game_boundary_y
-    bounds = v.get_board_boundary(img)
-    game_boundary_x = [bounds[0], bounds[1]]
-    game_boundary_y = [bounds[3], bounds[2]]
-    print("[Min, Max] X", game_boundary_x)
-    print("[Min, Max] Y", game_boundary_y)
-    return draw_game_boundary(img)
-
-def draw_game_boundary(img):
-    global game_boundary_x
-    global game_boundary_y
-    start = [game_boundary_x[0], game_boundary_y[0]]
-    end = [game_boundary_x[1], game_boundary_y[1]]
-    return v.draw_rectangle(img, start, end, (0, 0, 255))
-   # return v.draw_rectangle(img, v.get_board_start(img), v.get_board_end(img), (0, 0, 255))
-
-main()
+handle_video('botAttempt2/resources/demo.mp4')

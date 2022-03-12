@@ -17,3 +17,7 @@ Moving on to botAttempt2 - I'm going to start from scratch, using what I've alre
 My idea this time is to stray away from the concept of the game being on a brid - and instead focus on moving the snake to pixel coordinates.
 
 I'll start out by making the snake avoid the game boundary.
+
+    Avoid the Game Boundary
+        1) Highlight the Game boundary
+            

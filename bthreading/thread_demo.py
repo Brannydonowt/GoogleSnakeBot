@@ -87,8 +87,8 @@ def threadBoth(source=0):
             break
 
         frame = video_getter.frame
-        frame = putIterationsPerSec(frame, cps.countsPerSec())
+        #frame = putIterationsPerSec(frame, cps.countsPerSec())
         video_shower.frame = frame
         cps.increment()
 
-threadBoth('C:/Users/Brand/Documents/VSProjects/GitHub/GoogleSnakeBot/bthreading/resources/snakedemo.mp4')
+threadBoth('botAttempt2/resources/demo.mp4')
