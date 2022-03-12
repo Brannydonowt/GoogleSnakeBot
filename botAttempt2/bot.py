@@ -5,6 +5,7 @@ from VideoGet import VideoGet
 from VideoShow import VideoShow
 from CountsPerSec import CountsPerSec
 from threading import Thread
+from game import game
 
 def handle_video(source=0):
     video_getter = VideoGet(source).start()
@@ -18,6 +19,9 @@ def handle_video(source=0):
             break
 
         frame = video_getter.frame
+
+        state = game(frame).start()
+        frame = labels.draw_game_boundary(frame, state.boundsX, state.boundsY)
         video_shower.frame = frame
         cps.increment()
 

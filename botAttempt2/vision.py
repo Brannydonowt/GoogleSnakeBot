@@ -25,27 +25,43 @@ class vision:
 
     def get_board_start(self, img):
         compare = lambda x, y: collections.Counter(x) == collections.Counter(y)
-        col = [170, 215, 81, 255]
+        col = [75, 218, 163, 255]
+        img = np.array(img)
+        img = cv.cvtColor(img, 0)
         for h in range(0, len(img)):
-            for w in range(0, 600):
+            for w in range(0, 934):
                 if (compare(img[h, w], col)):
                     print("Top Left [x,y] -", [w,h])
-                    return [w,h]
+                    return [w, h]
+                else:
+                    print("could not color match: ", img[h, w], "to", col)
 
     def get_board_end(self, img):
         compare = lambda x, y: collections.Counter(x) == collections.Counter(y)
-        col = [170, 215, 81, 255]
+        col = [75, 218, 163, 255]
+        img = np.array(img)
+        img = cv.cvtColor(img, 0)
         for h in reversed(range(0, len(img))):
-            for w in reversed(range(0, 600)):
+            for w in reversed(range(0, 934)):
                 if compare(img[h, w], col):
                     print("Bottom Right [x, y] -", [w,h])
                     return [w,h]
+                else:
+                    print("could not color match: ", img[h, w], "to", col)
 
     def get_board_boundary(self, img):
         start = self.get_board_start(img)
         end = self.get_board_end(img)
+        bounds = [start[0], end[0], end[1], start[1]]
+        return bounds
 
-        return [start[0], end[0], end[1], start[1]]
+    def get_boundary_x(self, img):
+        bounds = self.get_board_boundary(img)
+        return [bounds[0], bounds[1]]
+
+    def get_boundary_y(self, img):
+        bounds = self.get_board_boundary(img)
+        return [bounds[2], bounds[3]]
 
     def show_img(self, img):
         cv.imshow("vision", img)

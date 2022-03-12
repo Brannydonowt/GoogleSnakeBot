@@ -29,9 +29,7 @@ def putIterationsPerSec(frame, iterations_per_sec):
         (10, 450), cv.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255))
     return frame
 
-def draw_game_boundary(img):
-    global game_boundary_x
-    global game_boundary_y
+def draw_game_boundary(img, game_boundary_x, game_boundary_y):
     start = [game_boundary_x[0], game_boundary_y[0]]
     end = [game_boundary_x[1], game_boundary_y[1]]
     return draw_rectangle(img, start, end, (0, 0, 255))
